@@ -1,4 +1,4 @@
-FROM debian:buster
+FROM arm32v7/debian:buster
 
 LABEL maintainer="Radroxxx <radroxxx@gmail.com>"
 
