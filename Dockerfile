@@ -56,6 +56,7 @@ RUN	set -x \
 		--enable func_math \
 		--enable func_sprintf \
 		--enable func_strings \
+		--enable func_base64 \
 		--enable app_confbridge \
 		--enable app_db \
 		--enable app_dial \
@@ -175,6 +176,11 @@ RUN	set -x \
 		menuselect.makeopts \
 	&& make all \
 	&& make install \
+# Create samples and move them to the /opt/asterisk-samples/
+	&& make samples \
+	&& mkdir -p /opt/asterisk-samples/ \
+	&& mv /etc/asterisk/* /opt/asterisk-samples/ \
+# Cleanup
 	&& make dist-clean \
 	&& make clean \
 # Install chan-dongle
