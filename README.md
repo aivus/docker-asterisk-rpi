@@ -1,18 +1,33 @@
-# asterisk
-Asterisk + chan_dongle in docker.
+# Asterisk RPi + chan_dongle
 
-**Usage example**
-  * Build docker image.
-    ```sh
-    docker build -t asterisk https://raw.githubusercontent.com/dec0dOS/asterisk/master/Dockerfile
-    ```
-    or pull from docker hub
-    ```sh
-    docker pull dec0dos/asterisk-rpi:latest
-    ```
-  * Create and run persistent container
-    ```sh
-    docker run --name asterisk-cont --network host --privileged -v /dev:/dev -v /etc/asterisk:/etc/asterisk -dit --restart unless-stopped asterisk
-    ```
+This repository contains docker configuration and provides images for [Asterisk](https://www.asterisk.org/) with [chan_dongle](https://github.com/wdoekes/asterisk-chan-dongle).
+
+Docker repository: [aivus/asterisk-rpi](https://hub.docker.com/r/aivus/asterisk-rpi)
+
+# Basic usage
+
+## Using images from hub.docker.com
+
+Dockerhub contains docker images with compiled binaries for all available ARM platforms of Raspberry Pi: armv6, armv7, arm64.
+
+To start container run command like:
+```sh
+docker run -d --name asterisk --volume ~/asterisk:/etc/asterisk --network host --device /dev/ttyUSB0:/dev/ttyUSB0 --device /dev/ttyUSB1:/dev/ttyUSB1 --device /dev/ttyUSB2:/dev/ttyUSB2 --restart always aivus/asterisk-rpi:master
+```
+
+where:
+* `~/asterisk` is a directory with asterisk configuration. (Don't have configuration? See [How to create sample configuration](#how-to-create-sample-configuration))
+* `--device /dev/ttyUSBX:/dev/ttyUSBX` is a path to the USB devices of Huawei UMTS card
+
+## Build yourself
+
+To build the image locally run:
+
+```sh
+docker build -t asterisk https://raw.githubusercontent.com/aivus/docker-asterisk-rpi/master/Dockerfile
+```
 
 
+# How to create sample configuration
+
+TBD
