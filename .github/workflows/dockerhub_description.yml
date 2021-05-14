@@ -5,7 +5,7 @@ on:
       - master
     paths:
       - README.md
-      - .github/workflows/dockerhub-description.yml
+      - .github/workflows/dockerhub_description.yml
 
 jobs:
   update-description:
