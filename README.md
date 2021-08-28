@@ -33,5 +33,17 @@ docker build -t asterisk https://raw.githubusercontent.com/aivus/docker-asterisk
 
 
 # How to create sample configuration
+To start the Asterisk you need to have a configuration skeleton.
+Fortunately, this default configuration could be copied right from the image.
 
-TBD
+Follow this steps to copy sample configuration from the image to host machine
+
+```sh
+# create a directory with config
+mkdir asterisk
+
+# copy sample configuration from the image
+docker create --name asterisk-samples aivus/asterisk-rpi:master
+docker cp asterisk-samples:/opt/asterisk-samples/ asterisk
+docker rm asterisk-samples
+```
