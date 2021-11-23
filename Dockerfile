@@ -57,6 +57,7 @@ RUN	set -x \
 		--enable func_sprintf \
 		--enable func_strings \
 		--enable func_base64 \
+		--enable func_uri \
 		--enable app_confbridge \
 		--enable app_db \
 		--enable app_dial \
