@@ -1,8 +1,6 @@
 name: Build and push
 
-# Controls when the action will run. 
 on:
-  # Triggers the workflow on push or pull request events but only for the master branch
   push:
     branches: [ master ]
     paths:
@@ -15,8 +13,8 @@ on:
     paths:
       - Dockerfile
       - .github/workflows/build_and_push.yml
-
-  # Allows you to run this workflow manually from the Actions tab
+  schedule:
+    - cron:  '23 2 */7 * *'
   workflow_dispatch:
 
 jobs:
@@ -35,8 +33,6 @@ jobs:
           tags: |
             type=ref,event=branch
             type=ref,event=tag
-            type=ref,event=pr
-            type=sha
       -
         name: Set up QEMU
         uses: docker/setup-qemu-action@v1
@@ -59,3 +55,5 @@ jobs:
           platforms: linux/arm/v7,linux/arm64
           push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ steps.meta.outputs.tags }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
