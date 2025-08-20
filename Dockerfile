@@ -1,4 +1,4 @@
-FROM debian:buster
+FROM debian:bookworm
 
 ENV ASTERISK_VERSION certified/13.21-cert6
 ENV ASTERIS_VERSION_DONGLE 13.21
