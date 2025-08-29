@@ -1,6 +1,6 @@
 FROM debian:bookworm
 
-ENV ASTERISK_VERSION certified/13.21-cert6
+ENV ASTERISK_VERSION certified/16.3-cert1
 ENV ASTERIS_VERSION_DONGLE 13.21
 ENV DEBIAN_FRONTEND=noninteractive
 
