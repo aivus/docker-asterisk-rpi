@@ -1,7 +1,7 @@
 FROM debian:bookworm
 
-ENV ASTERISK_VERSION certified/13.21-cert6
-ENV ASTERIS_VERSION_DONGLE 13.21
+ENV ASTERISK_VERSION certified-20.7-cert10
+ENV ASTERIS_VERSION_DONGLE 20.7
 ENV DEBIAN_FRONTEND=noninteractive
 
 RUN	set -x \
@@ -75,8 +75,6 @@ RUN	set -x \
 		--enable app_verbose \
 		--enable app_voicemail \
 		--enable app_externalivr \
-		--enable app_fax \
-		--enable app_image \
 		--enable app_jack \
 		--enable app_sms \
 		--enable pbx_config \
@@ -163,7 +161,6 @@ RUN	set -x \
 		--enable res_chan_stats \
 		--enable res_config_ldap \
 		--enable res_config_pgsql \
-		--enable res_config_sqlite \
 		--enable res_corosync \
 		--enable res_endpoint_stats \
 		--enable res_snmp \
