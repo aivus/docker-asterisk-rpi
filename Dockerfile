@@ -13,7 +13,6 @@ RUN	set -x \
 # Install asterisk
 	&& cd /usr/local/src/asterisk \
 	&& yes | contrib/scripts/install_prereq install \
-	&& contrib/scripts/install_prereq test \
 	&& ./bootstrap.sh && ./configure \
 	&& make menuselect.makeopts \
 	&& menuselect/menuselect --disable BUILD_NATIVE --disable-all \
