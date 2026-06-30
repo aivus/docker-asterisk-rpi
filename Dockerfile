@@ -173,6 +173,10 @@ RUN	set -x \
 		menuselect.makeopts \
 	&& make all \
 	&& make install \
+# Install development headers (asterisk.h etc.) so chan-dongle can build against them.
+# `make install` no longer installs headers; this must run before `make dist-clean`
+# while the generated headers (autoconfig.h, version.h, buildopts.h) still exist.
+	&& make install-headers \
 # Create samples and move them to the /opt/asterisk-samples/
 	&& make samples \
 	&& mkdir -p /opt/asterisk-samples/ \
