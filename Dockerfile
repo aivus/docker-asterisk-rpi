@@ -1,7 +1,7 @@
 FROM debian:bookworm
 
-ENV ASTERISK_VERSION certified/13.21-cert6
-ENV ASTERIS_VERSION_DONGLE 13.21
+ENV ASTERISK_VERSION certified-20.7-cert10
+ENV ASTERIS_VERSION_DONGLE 20.7
 ENV DEBIAN_FRONTEND=noninteractive
 
 RUN	set -x \
@@ -13,7 +13,6 @@ RUN	set -x \
 # Install asterisk
 	&& cd /usr/local/src/asterisk \
 	&& yes | contrib/scripts/install_prereq install \
-	&& contrib/scripts/install_prereq test \
 	&& ./bootstrap.sh && ./configure \
 	&& make menuselect.makeopts \
 	&& menuselect/menuselect --disable BUILD_NATIVE --disable-all \
@@ -75,8 +74,6 @@ RUN	set -x \
 		--enable app_verbose \
 		--enable app_voicemail \
 		--enable app_externalivr \
-		--enable app_fax \
-		--enable app_image \
 		--enable app_jack \
 		--enable app_sms \
 		--enable pbx_config \
@@ -163,7 +160,6 @@ RUN	set -x \
 		--enable res_chan_stats \
 		--enable res_config_ldap \
 		--enable res_config_pgsql \
-		--enable res_config_sqlite \
 		--enable res_corosync \
 		--enable res_endpoint_stats \
 		--enable res_snmp \
@@ -177,6 +173,10 @@ RUN	set -x \
 		menuselect.makeopts \
 	&& make all \
 	&& make install \
+# Install development headers (asterisk.h etc.) so chan-dongle can build against them.
+# `make install` no longer installs headers; this must run before `make dist-clean`
+# while the generated headers (autoconfig.h, version.h, buildopts.h) still exist.
+	&& make install-headers \
 # Create samples and move them to the /opt/asterisk-samples/
 	&& make samples \
 	&& mkdir -p /opt/asterisk-samples/ \
